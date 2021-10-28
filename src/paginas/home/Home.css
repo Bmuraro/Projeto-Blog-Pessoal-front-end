@@ -1,3 +1,22 @@
+.caixa{
+    background-color: black;
+}
+
+.texto{
+    color: white!important;
+    font-weight: bold!important;
+}
+
+.botao{
+    border-color: white!important;
+    background-color: #3F51B5;
+    color: white!important;
+}
+
+.post{
+    background-color: white;
+}
+
 .titulo{
     color: brown;
     text-align: center;
