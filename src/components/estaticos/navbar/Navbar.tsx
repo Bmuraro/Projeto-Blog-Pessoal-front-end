@@ -1,19 +1,23 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box } from '@material-ui/core';
-
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import { Box } from '@material-ui/core';
+import MenuComponent from '../MenuComponent/MenuComponent';
 
 function Navbar() {
     return (
         <>
-            <AppBar position="static">
-                <Toolbar variant="dense">
-                    <Box style={{ cursor: "pointer" }} >
+            <AppBar position="static" color="secondary" >
+            <Box style={{ cursor: "pointer" }} justifyContent="center">
                         <Typography variant="h5" color="inherit">
                             BlogPessoalTeste
                         </Typography>
                     </Box>
-
-                    <Box display="flex" justifyContent="start">
+                    <Box justifyContent="space-between">
+                <Toolbar variant="dense" >
+                    
+                    <Box display="flex" justifyContent="center">
                         <Box mx={1} style={{ cursor: "pointer" }}>
                             <Typography variant="h6" color="inherit">
                                 home
@@ -34,17 +38,23 @@ function Navbar() {
                                 cadastrar tema
                             </Typography>
                         </Box>
-                        <Box display="flex-end" mx={1} style={{ cursor: "pointer" }}>
+                        <Box mx={1} style={{ cursor: "pointer" }}>
                             <Typography variant="h6" color="inherit">
                                 logout
                             </Typography>
                         </Box>
-                    </Box>
 
+                    </Box>
+                    <Box justifyContent="flex-end">
+                    <MenuComponent />
+                </Box>
                 </Toolbar>
+                </Box>
+                
             </AppBar>
         </>
     )
 }
+
 
 export default Navbar;
