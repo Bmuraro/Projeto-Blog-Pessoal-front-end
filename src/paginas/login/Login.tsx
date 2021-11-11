@@ -4,13 +4,16 @@ import Container from '@mui/material/Container'
 import {Grid, Box, Typography, TextField, Button} from '@material-ui/core';
 import {Link, useHistory} from 'react-router-dom';
 import UserLogin from '../../models/UserLogin';
-import useLocalStorage from 'react-use-localstorage';
 import {login} from '../../services/Service';
+import { useDispatch } from 'react-redux';
+import { addToken } from '../../store/tokens/actions';
+import { toast } from 'react-toastify';
 
 function Login() {
 
     let history = useHistory();
-    const [token, setToken] =  useLocalStorage('token');
+    const dispatch = useDispatch();
+    const [token, setToken] =  useState('');
     const [userLogin, setUserLogin] = useState<UserLogin>(
         {
             id: 0,
@@ -28,6 +31,7 @@ function Login() {
         }
             useEffect(()=>{
                 if(token!=''){
+                    dispatch(addToken(token))
                     history.push('/home')
                 }
             },[token])
@@ -36,9 +40,27 @@ function Login() {
             try{
                 await login(`/usuarios/logar`, userLogin, setToken)
 
-                alert('Usuario logado com sucesso!');
+                toast.success('Usuário logado com sucesso', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme:"colored",
+                    progress: undefined,
+                })
             } catch(error){
-                alert('Dados do usuario inconsistentes. Erro ao logar!')
+                toast.error('Dados do usuario inconsistentes. Erro ao logar!', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme:"colored",
+                    progress: undefined,
+                })
 
             }
 
@@ -85,8 +107,8 @@ function Login() {
                                 Não tem uma conta?
                             </Typography>
                         </Box>
-                        <Link to='/CadastroUsuario'>
-                        <Typography variant='subtitle1' gutterBottom align='center' className='texto1 , text-decorator-none'>
+                        <Link to='/cadastrar' className='text-decorator-none'>
+                        <Typography variant='subtitle1' gutterBottom align='center' className='texto1'>
                             Cadastre-se
                         </Typography>
                         </Link>
