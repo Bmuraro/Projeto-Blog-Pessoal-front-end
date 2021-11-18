@@ -4,7 +4,7 @@ import Tema from '../../../models/Tema';
 import { buscaId, post, put } from '../../../services/Service';
 import { useHistory, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/userReducer';
 import { toast } from 'react-toastify';
 
 
@@ -17,7 +17,7 @@ function CadastroTema() {
         descricao: ''
     })
 
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
         );
 
@@ -64,7 +64,7 @@ function CadastroTema() {
             console.log(tema)
             put(`/tema`, tema, setTema, {
                 headers: {
-                    'Auorization': token
+                    'Authorization': token
                 }
             })
             toast.success('Tema atualizado com sucesso', {

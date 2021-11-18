@@ -1,12 +1,11 @@
 import React, {useState, useEffect, ChangeEvent} from 'react';
 import './Login.css';
-import Container from '@mui/material/Container'
 import {Grid, Box, Typography, TextField, Button} from '@material-ui/core';
 import {Link, useHistory} from 'react-router-dom';
 import UserLogin from '../../models/UserLogin';
 import {login} from '../../services/Service';
 import { useDispatch } from 'react-redux';
-import { addToken } from '../../store/tokens/actions';
+import { addToken } from '../../store/user/actions';
 import { toast } from 'react-toastify';
 
 function Login() {

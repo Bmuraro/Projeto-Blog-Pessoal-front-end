@@ -5,7 +5,7 @@ import './ListaPostagem.css';
 import Postagem from '../../../models/Postagem';
 import { busca } from '../../../services/Service';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/userReducer';
 import { toast } from 'react-toastify';
 
 function ListaPostagem() {
@@ -13,8 +13,11 @@ function ListaPostagem() {
   const [posts, setPosts] = useState<Postagem[]>([])
   let history = useHistory()
 
-  const token = useSelector<TokenState, TokenState["tokens"]>(
+  const token = useSelector<UserState, UserState["tokens"]>(
     (state) => state.tokens
+    );
+  const tipo = useSelector<UserState, UserState["tipos"]>(
+      (state) => state.tipos
     );
 
   useEffect(()=>{

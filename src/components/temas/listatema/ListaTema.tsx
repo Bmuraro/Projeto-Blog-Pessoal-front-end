@@ -5,16 +5,20 @@ import './ListaTema.css';
 import Tema from '../../../models/Tema';
 import { busca } from '../../../services/Service';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/userReducer';
 import { toast } from 'react-toastify';
 
 function ListaTema() {
 
   const [temas, setTemas] = useState<Tema[]>([])
   let history = useHistory()
-  const token = useSelector<TokenState, TokenState["tokens"]>(
+  const token = useSelector<UserState, UserState["tokens"]>(
     (state) => state.tokens
     );
+
+  const tipo = useSelector<UserState, UserState["tipos"]>(
+      (state) => state.tipos
+  );
 
   useEffect(()=>{
     if(token==''){
@@ -42,6 +46,11 @@ function ListaTema() {
     getTema()
   },[temas.length])
 
+  var botoes :string
+  if (tipo != "Admin") {
+    botoes = "bottom-none"
+  }
+
   return (
     <>
     {
@@ -57,7 +66,7 @@ function ListaTema() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Box display="flex" justifyContent="center" mb={1.5} >
+            <Box display="flex" justifyContent="center" mb={1.5}>
 
               <Link to={`/formularioTema/${tema.id}`} className="text-decorator-none">
                 <Box mx={1}>
